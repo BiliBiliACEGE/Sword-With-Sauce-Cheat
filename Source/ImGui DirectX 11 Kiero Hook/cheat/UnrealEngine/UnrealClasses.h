@@ -356,6 +356,7 @@ struct AEnemy : UtilClass // actual class name: EnemyAI_BluePrintV2_C
 
 	bool IsPlayer() const
 	{
+		if (!this) return false;
 		return
 			this->HasValidId() &&																		// is it a invalid pointer
 			std::string(mem::GetGName(this->FNameIndex))._Starts_with("EnemyAI_BluePrint") &&			// is enemy type

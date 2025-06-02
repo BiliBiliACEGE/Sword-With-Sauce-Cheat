@@ -83,6 +83,7 @@ ID3D11Device* pDevice = 0;
 ID3D11DeviceContext* pContext = 0;
 ID3D11RenderTargetView* mainRenderTargetView;
 
+
 void InitImGui()
 {
 	ImGui::CreateContext();
@@ -95,7 +96,7 @@ void InitImGui()
 	style.FrameRounding = 3.0f;
 	style.GrabRounding = 3.0f;
 
-	io.Fonts->AddFontDefault();
+	io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\msyh.ttc",30.f,NULL,io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
 
 	ImGui_ImplWin32_Init(window);
 	ImGui_ImplDX11_Init(pDevice, pContext);

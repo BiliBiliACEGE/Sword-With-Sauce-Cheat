@@ -1,0 +1,59 @@
+﻿  menu.cpp
+D:\Downloads\code\menu\UE4-Cheat-Source-Code\Source\ImGui DirectX 11 Kiero Hook\cheat\UnrealEngine\Classes.hpp(231,18): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+  (编译源文件“menu/menu.cpp”)
+  
+D:\Downloads\code\menu\UE4-Cheat-Source-Code\Source\ImGui DirectX 11 Kiero Hook\cheat\UnrealEngine\Classes.hpp(232,16): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+  (编译源文件“menu/menu.cpp”)
+  
+D:\Downloads\code\menu\UE4-Cheat-Source-Code\Source\ImGui DirectX 11 Kiero Hook\cheat\UnrealEngine\Classes.hpp(233,17): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+  (编译源文件“menu/menu.cpp”)
+  
+D:\Downloads\code\menu\UE4-Cheat-Source-Code\Source\ImGui DirectX 11 Kiero Hook\cheat\UnrealEngine\UnrealClasses.h(394,85): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+  (编译源文件“menu/menu.cpp”)
+  
+D:\Downloads\code\menu\UE4-Cheat-Source-Code\Source\ImGui DirectX 11 Kiero Hook\cheat\UnrealEngine\UnrealClasses.h(395,85): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+  (编译源文件“menu/menu.cpp”)
+  
+D:\Downloads\code\menu\UE4-Cheat-Source-Code\Source\ImGui DirectX 11 Kiero Hook\menu\menu.cpp(54,36): warning C4244: “参数”: 从“float”转换到“const USHORT”，可能丢失数据
+D:\Downloads\code\menu\UE4-Cheat-Source-Code\Source\ImGui DirectX 11 Kiero Hook\menu\menu.cpp(71,36): warning C4244: “参数”: 从“float”转换到“const USHORT”，可能丢失数据
+D:\Downloads\code\menu\UE4-Cheat-Source-Code\Source\ImGui DirectX 11 Kiero Hook\menu\menu.cpp(122,67): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+D:\Downloads\code\menu\UE4-Cheat-Source-Code\Source\ImGui DirectX 11 Kiero Hook\menu\menu.cpp(325,15): warning C4244: “参数”: 从“USHORT”转换到“_Elem”，可能丢失数据
+D:\Downloads\code\menu\UE4-Cheat-Source-Code\Source\ImGui DirectX 11 Kiero Hook\menu\menu.cpp(325,15): warning C4244:         with
+D:\Downloads\code\menu\UE4-Cheat-Source-Code\Source\ImGui DirectX 11 Kiero Hook\menu\menu.cpp(325,15): warning C4244:         [
+D:\Downloads\code\menu\UE4-Cheat-Source-Code\Source\ImGui DirectX 11 Kiero Hook\menu\menu.cpp(325,15): warning C4244:             _Elem=char
+D:\Downloads\code\menu\UE4-Cheat-Source-Code\Source\ImGui DirectX 11 Kiero Hook\menu\menu.cpp(325,15): warning C4244:         ]
+D:\VS\VC\Tools\MSVC\14.43.34808\include\xutility(4829,18): warning C4244: “=”: 从“wchar_t”转换到“char”，可能丢失数据
+  (编译源文件“menu/menu.cpp”)
+      D:\VS\VC\Tools\MSVC\14.43.34808\include\xutility(4829,18):
+      模板实例化上下文(最早的实例化上下文)为
+          D:\Downloads\code\menu\UE4-Cheat-Source-Code\Source\ImGui DirectX 11 Kiero Hook\cheat\UnrealEngine\UnrealClasses.h(64,28):
+          查看对正在编译的函数 模板 实例化“std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(_Iter,_Iter,const _Alloc &)”的引用
+          with
+          [
+              _Elem=wchar_t,
+              _Iter=std::_String_iterator<std::_String_val<std::_Simple_types<wchar_t>>>,
+              _Alloc=std::allocator<char>
+          ]
+              D:\Downloads\code\menu\UE4-Cheat-Source-Code\Source\ImGui DirectX 11 Kiero Hook\cheat\UnrealEngine\UnrealClasses.h(64,11):
+              请参阅 "FString::GetString" 中对 "std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string" 的第一个引用
+          D:\VS\VC\Tools\MSVC\14.43.34808\include\xstring(788,17):
+          查看对正在编译的函数 模板 实例化“void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct_from_iter<wchar_t*,wchar_t*,_Size_type>(_Iter,const _Sent,_Size)”的引用
+          with
+          [
+              _Size_type=unsigned __int64,
+              _Iter=wchar_t *,
+              _Sent=wchar_t *,
+              _Size=unsigned __int64
+          ]
+          D:\VS\VC\Tools\MSVC\14.43.34808\include\xstring(944,18):
+          查看对正在编译的函数 模板 实例化“_OutIt *std::_Copy_n_unchecked4<wchar_t*,_Size,char*>(_InIt,_SizeTy,_OutIt)”的引用
+          with
+          [
+              _OutIt=char *,
+              _Size=unsigned __int64,
+              _InIt=wchar_t *,
+              _SizeTy=unsigned __int64
+          ]
+  
+  LINK : 没有找到 D:\Downloads\code\menu\UE4-Cheat-Source-Code\Source\x64\Debug\SWS 1hAck Trainer.dll 或上一个增量链接没有生成它；正在执行完全链接
+  ImGui DirectX 11 Kiero Hook.vcxproj -> D:\Downloads\code\menu\UE4-Cheat-Source-Code\Source\x64\Debug\SWS 1hAck Trainer.dll

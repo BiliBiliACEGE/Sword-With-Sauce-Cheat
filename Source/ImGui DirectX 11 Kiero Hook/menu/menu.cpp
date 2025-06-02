@@ -20,7 +20,8 @@ namespace ImGui
 // MENU
 namespace Menu
 {
-	inline constexpr const vec2 MenuSize = { 500, 430 };
+	inline constexpr const vec2 MenuSize = { 800, 650 };
+
 
 	void Render()
 	{
@@ -38,7 +39,7 @@ namespace Menu
 				bInited = true;
 			}
 
-			ImGui::Begin("Sword With Sauce | 1hAck Trainer", 0,
+			ImGui::Begin(u8"Sword With Sauce 2.4.0 | 作弊菜单", 0,
 				ImGuiWindowFlags_NoScrollbar |
 				ImGuiWindowFlags_NoScrollWithMouse |
 				ImGuiWindowFlags_NoCollapse |
@@ -46,54 +47,55 @@ namespace Menu
 				ImGuiWindowFlags_NoResize);
 
 			ImGui::Columns(2);
-			ImGui::SetColumnOffset(1, 250);
+			ImGui::SetColumnOffset(1, 420);
 
 			// ESP
-			ImGui::Text("ESP");
+			ImGui::Text(u8"透视功能");
 			ImGui::DrawSeparator(MenuSize.x - 15);
 			ImGui::Spacing();
 			ImGui::Spacing();
 
-			ImGui::Checkbox("Boxes", &cfg->esp->bBoxes);
+			ImGui::Checkbox(u8"敌人边框", &cfg->esp->bBoxes);
 			ImGui::SameLine();
-			static constexpr const char* const Items_BoxTypes[] = { "2D Box", "3D Box", "Corners" };
-			ImGui::SetNextItemWidth(75);
-			ImGui::Combo("Box Type", &cfg->esp->boxType, Items_BoxTypes, IM_ARRAYSIZE(Items_BoxTypes));
+			static constexpr const char* const Items_BoxTypes[] = { u8"2D边框", u8"3D边框", u8"角点边框" };
+			ImGui::SetNextItemWidth(150);
+			assert(cfg->esp->boxType >= 0 && cfg->esp->boxType < IM_ARRAYSIZE(Items_BoxTypes));
+			ImGui::Combo(u8"边框类型", &cfg->esp->boxType, Items_BoxTypes, IM_ARRAYSIZE(Items_BoxTypes));
 
-			ImGui::Checkbox("Snaplines", &cfg->esp->bSnaplines);
-			ImGui::Checkbox("Skeleton", &cfg->esp->bSkeleton);
+			ImGui::Checkbox(u8"透视线", &cfg->esp->bSnaplines);
+			ImGui::Checkbox(u8"敌人骨架", &cfg->esp->bSkeleton);
 
 			// TRIGGERBOT
 			ImGui::SetCursorPosY(210);
-			ImGui::Text("Triggerbot");
+			ImGui::Text(u8"敌人触发器");
 			ImGui::DrawSeparator(MenuSize.x - 15);
 			ImGui::Spacing();
 			ImGui::Spacing();
 
-			ImGui::Checkbox("Enabled", &cfg->trg->bEnabled);
+			ImGui::Checkbox(u8"启用", &cfg->trg->bEnabled);
 
 			static bool bGetKey1 = false;
-			ImGui::HotkeyButton(cfg->trg->key, "Hotkey", "##19f212", bGetKey1);
+			ImGui::HotkeyButton(cfg->trg->key, u8"热键", "##19f212", bGetKey1);
 
-			ImGui::Checkbox("Delay", &cfg->trg->bDelay);
+			ImGui::Checkbox(u8"间隔", &cfg->trg->bDelay);
 			if (cfg->trg->bDelay)
 			{
 				ImGui::SameLine();
-				ImGui::SetNextItemWidth(70);
-				ImGui::Combo("Delay Mode", &cfg->trg->delayMode, "Custom\0Random\0\0");
+				ImGui::SetNextItemWidth(100);
+				ImGui::Combo(u8"间隔模式", &cfg->trg->delayMode, u8"自定义\0随机\0\0");
 
 				ImGui::Spacing();
 				if (!cfg->trg->delayMode) // custom delay
 				{
 					ImGui::SetNextItemWidth(170);
-					ImGui::SliderInt("Delay##slider", &cfg->trg->customDelay, 1, 300, "%d ms");
+					ImGui::SliderInt("Delay##slider", &cfg->trg->customDelay, 1, 300, u8"%d 毫秒");
 				}
 				else // random delay
 				{
 					ImGui::SetNextItemWidth(150);
-					ImGui::SliderInt("Min Delay##slider", &cfg->trg->minRanDelay, 1, 300, "%d ms");
+					ImGui::SliderInt(u8"最小 Delay##slider", &cfg->trg->minRanDelay, 1, 300, u8"%d 毫秒");
 					ImGui::SetNextItemWidth(150);
-					ImGui::SliderInt("Max Delay##slider", &cfg->trg->maxRanDelay, 2, 300, "%d ms");
+					ImGui::SliderInt(u8"最大 Delay##slider", &cfg->trg->maxRanDelay, 2, 300, u8"%d 毫秒");
 
 					if (cfg->trg->maxRanDelay <= cfg->trg->minRanDelay)
 						cfg->trg->minRanDelay = cfg->trg->maxRanDelay - 1;
@@ -104,55 +106,51 @@ namespace Menu
 			ImGui::NextColumn();
 
 			// AIMBOT
-			ImGui::Text("Aimbot");
+			ImGui::Text(u8"实用功能");
 			ImGui::Spacing();
 			ImGui::Spacing();
 
-			ImGui::Checkbox("Aimbot", &cfg->aimbot->bEnabled);
+			ImGui::Checkbox(u8"自动锁敌", &cfg->aimbot->bEnabled);
 
-			ImGui::Checkbox("Visibile Check", &cfg->aimbot->bVisibleOnly);
+			ImGui::Checkbox(u8"可见度检查", &cfg->aimbot->bVisibleOnly);
 
-			ImGui::Checkbox("FOV", &cfg->aimbot->bFOV);
+			ImGui::Checkbox(u8"视野", &cfg->aimbot->bFOV);
 			if (cfg->aimbot->bFOV)
 			{
 				ImGui::SameLine();
 				ImGui::SetNextItemWidth(150);
 				ImGui::SliderInt("##fov slider", &cfg->aimbot->FOV, 4, winSize.x);
 
-				ImGui::Checkbox("FOV Circle", &cfg->aimbot->bFOVCircle);
-
-				ImGui::Spacing();
+				ImGui::Checkbox(u8"视野范围", &cfg->aimbot->bFOVCircle);
+				ImGui::Dummy(ImVec2(0, 10)); // 添加 20 像素垂直间距
 			}
 
-			ImGui::SetNextItemWidth(160);
-			ImGui::SliderFloat("Smoothness", &cfg->aimbot->smoothness, 1.f, 10.f, "%.2f");
 
-			static bool bGetKey2 = false;
-			ImGui::HotkeyButton(cfg->aimbot->aimKey, "Hotkey", "##29r9102", bGetKey2);
+			
+
+			/*static bool bGetKey2 = false;
+			ImGui::HotkeyButton(cfg->aimbot->aimKey, u8"热键", "##29r9102", bGetKey2);
+			ImGui::Spacing();*/
 
 			// EXPLOITS
 			ImGui::SetCursorPosY(210);
-			ImGui::Text("Exploits");
-			ImGui::Spacing();
-			ImGui::Spacing();
-
-			ImGui::Checkbox("Infinite Health", &cfg->exploit->bInfiniteHealth);
-			ImGui::Checkbox("Infinite Ammo", &cfg->exploit->bInfiniteAmmo);
-			ImGui::Checkbox("No Spread", &cfg->exploit->bNoSpread);
+			ImGui::Dummy(ImVec2(0, 40)); 
+			ImGui::Checkbox(u8"无限生命", &cfg->exploit->bInfiniteHealth);
+			ImGui::Checkbox(u8"无限弹药", &cfg->exploit->bInfiniteAmmo);
+			ImGui::Checkbox(u8"消除群体", &cfg->exploit->bNoSpread);
 			if (ImGui::IsItemHovered())
-				ImGui::SetTooltip("Doesn't really work lol...");
-
-			ImGui::Checkbox("No Clip", &cfg->exploit->bNoClip);
+				ImGui::SetTooltip(u8"真的不起作用，哈哈...");
+			ImGui::Checkbox(u8"穿墙", &cfg->exploit->bNoClip);
 			ImGui::SameLine();
 			static bool bGetKey3 = false;
-			ImGui::HotkeyButton(cfg->exploit->noClipKey, "Hotkey", "##19r892", bGetKey3);
+			ImGui::HotkeyButton(cfg->exploit->noClipKey, u8"热键", "##19r892", bGetKey3);
 
-			ImGui::Checkbox("Flyhack", &cfg->exploit->bFlyHack);
+			ImGui::Checkbox(u8"飞行模式", &cfg->exploit->bFlyHack);
 			ImGui::SameLine();
 			static bool bGetKey4 = false;
-			ImGui::HotkeyButton(cfg->exploit->flyKey, "Hotkey", "##9591", bGetKey4);
+			ImGui::HotkeyButton(cfg->exploit->flyKey, u8"热键", "##9591", bGetKey4);
 
-			ImGui::Checkbox("Speedhack", &cfg->exploit->bSpeedHack);
+			ImGui::Checkbox(u8"修改速度", &cfg->exploit->bSpeedHack);
 			if (cfg->exploit->bSpeedHack)
 			{
 				ImGui::SameLine();
@@ -160,7 +158,7 @@ namespace Menu
 				ImGui::SliderFloat("##speed slider", &cfg->exploit->speed, 1000.f, 5000.f, "%.2f");
 			}
 
-			ImGui::Checkbox("Super Jump", &cfg->exploit->bSuperJump);
+			ImGui::Checkbox(u8"超级跳跃", &cfg->exploit->bSuperJump);
 			if (cfg->exploit->bSuperJump)
 			{
 				ImGui::SameLine();
@@ -168,13 +166,15 @@ namespace Menu
 				ImGui::SliderFloat("##jumpHeight slider", &cfg->exploit->jumpHeight, 420.f, 1000.f, "%.2f");
 			}
 
-			ImGui::Checkbox("Mod Gravity", &cfg->exploit->bModGravity);
+			ImGui::Checkbox(u8"修改重力", &cfg->exploit->bModGravity);
 			if (cfg->exploit->bModGravity)
 			{
 				ImGui::SameLine();
 				ImGui::SetNextItemWidth(120);
 				ImGui::SliderFloat("##modGravity slider", &cfg->exploit->modGravity, 0.f, 1.f, "%.2f");
 			}
+			ImGui::SetNextItemWidth(160);
+			ImGui::SliderFloat(u8"视角平滑", &cfg->aimbot->smoothness, 1.f, 10.f, "%.2f");
 
 			ImGui::End();
 		}
@@ -327,12 +327,12 @@ namespace ImGui
 		}
 		button += new_button_id;
 
-		if (ImGui::Button(button.c_str(), ImVec2(70, 0)))
+		if (ImGui::Button(button.c_str(), ImVec2(75, 0)))
 			get_key = true;
 		if (ImGui::IsItemHovered())
 		{
 			if (dst != 0xADAF)
-				ImGui::SetTooltip(XorCStr("Double Click to Reset"));
+				ImGui::SetTooltip(XorCStr(u8"双击重置"));
 			if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
 			{
 				get_key = false;

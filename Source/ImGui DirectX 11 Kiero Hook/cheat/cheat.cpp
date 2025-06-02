@@ -81,7 +81,8 @@ namespace Cheat
 	bool bRun = false;
 	void DrawESP()
 	{
-		if (!bRun) return;
+		if (!bRun || !EntityList || !EntityList->items) return;
+		if (!EntityList || !EntityList->items) return;
 
 		ImDrawList* draw = ImGui::GetBackgroundDrawList();
 
@@ -101,6 +102,7 @@ namespace Cheat
 		for (USHORT i = 0; i < EntityList->count; i++)
 		{
 			auto& ent = EntityList->items[i];
+			if (!ent) continue; // 跳过空指针实体
 
 			if (!ent->IsPlayer())
 				continue;
@@ -110,6 +112,7 @@ namespace Cheat
 			{
 				auto DrawBone = [&](const byte bone1, const byte bone2)
 				{
+					if (!ent) return; // 防止异步释放导致的空指针
 					vec2 screenPos1, screenPos2;
 
 					bool

@@ -1,3 +1,5 @@
+[中文版](README_CN.md) | [English Version](#)
+
 # UE4 Cheat Source Code and Guide
 **FOR EDUCATIONAL PURPOSES ONLY**
 

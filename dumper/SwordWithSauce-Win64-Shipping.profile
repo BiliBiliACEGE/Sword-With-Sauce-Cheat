@@ -1,0 +1,17 @@
+[gameinfo]
+usesfnamepool=0
+isusingfchunkedfixeduobjectarray=1
+isusing4_22=1
+[ginfo]
+isginfopatterns=0
+gname=0x2f456e8
+gobject=0x2f499e8
+gworld=0x3048450
+[functioninfo]
+isfunctionpatterns=0
+gamestateinit=0x14c8540
+beginplay=0x1288ab0
+staticloadobject=0x78fa10
+spawnactorftrans=0x156b2d0
+callfunctionbynamewitharguments=0x77bbe0
+processevent=0x7896b0

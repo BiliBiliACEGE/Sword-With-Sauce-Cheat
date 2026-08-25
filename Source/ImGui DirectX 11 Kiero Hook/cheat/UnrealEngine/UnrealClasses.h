@@ -239,7 +239,10 @@ struct ARootComponent
 	union
 	{
 		UObject_d;
-		DEFINE_MEMBER_N(FTransform, CompToWorld, 0x188);
+		// ComponentToWorld @ 0x190（UE4.22 私有，藏在 Dumper Pad_188[0x38] 内）
+		// 运行时对照扫描确认：0x188 处 quat 全零（垃圾），0x190 处 quat 模长 0.995 + scale{1,1,1} + 稳定世界坐标
+		// 0x190+0x30=0x1C0 正好接上 ComponentVelocity @ 0x1C0，布局自洽
+		DEFINE_MEMBER_N(FTransform, CompToWorld, 0x190);
 		DEFINE_MEMBER_N(vec3, Velocity, 0x1C0);
 	};
 };
@@ -386,7 +389,10 @@ struct USkeletalMeshComponent
 	union
 	{
 		UObject_d;
-		DEFINE_MEMBER_N(FTransform, CompToWorld, 0x188);
+		// ComponentToWorld @ 0x190（UE4.22 私有，藏在 Dumper Pad_188[0x38] 内）
+		// 运行时对照扫描确认：0x188 处 quat 全零（垃圾），0x190 处 quat 模长 0.995 + scale{1,1,1} + 稳定世界坐标
+		// 0x190+0x30=0x1C0 正好接上 ComponentVelocity @ 0x1C0，布局自洽
+		DEFINE_MEMBER_N(FTransform, CompToWorld, 0x190);
 		// UE4.22 私有成员 ComponentSpaceTransformsArray @ 0x5B0：动画评估每帧写入的组件空间骨骼数组
 		// 位于 Dumper-7 的 Pad_5B0[0xA8] 区域（MasterPoseComponent@0x5A8 之后）
 		// 运行时扫描确认：count=62，头骨四元数模长=1.000，头骨距原点165cm（人体尺度）

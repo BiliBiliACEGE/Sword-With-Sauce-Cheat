@@ -675,7 +675,8 @@ namespace Cheat
 			else if (IsKeyHeld(VK_SPACE)) // don't go up if we are holding CTRL
 				sum.z += flySpeed;
 
-			player->CapsuleComponent->ModifiableLocation += sum;
+			// 世界坐标 = ComponentToWorld.Translation（0x190 + 0x10 = 0x1A0）
+			player->CapsuleComponent->CompToWorld.Translation += sum;
 			bResetFly = true;
 		}
 		else if (bResetFly)
@@ -718,9 +719,16 @@ namespace Cheat
 			bResetModGravity = false;
 		}
 
-		// safety check if we are above/under the map
-		if (player->CapsuleComponent->ModifiableLocation.z > 10000.f) player->CapsuleComponent->ModifiableLocation.z = 10000.f;
-		else if (player->CapsuleComponent->ModifiableLocation.z < 0.f) player->CapsuleComponent->ModifiableLocation.z = 0.f;
+		// SAFETY CHECK：只在飞行/穿墙开启时才干预位置（否则会污染正常移动）
+		// 关键：这里必须是组件世界坐标 ComponentToWorld.Translation。旧代码用的 ModifiableLocation(0x198)
+		// 在 4.22 里是 ComponentToWorld.Rotation.z，其 .z 落到 0x1A0 = Translation.x，
+		// 于是"钳制高度"实际变成了"把世界 X 钳制到 0"，在地图正中形成一道看不见的墙
+		if (cfg->exploit->bFlyHack || cfg->exploit->bNoClip)
+		{
+			vec3& playerWorldLoc = player->CapsuleComponent->CompToWorld.Translation;
+			if (playerWorldLoc.z > 10000.f) playerWorldLoc.z = 10000.f;
+			else if (playerWorldLoc.z < 0.f) playerWorldLoc.z = 0.f;
+		}
 	}
 		
 	// 主循环：由 Present hook 每帧驱动（旧版 hook 的 APlayerController::PostProcessInput pattern 已在最新版本失效）

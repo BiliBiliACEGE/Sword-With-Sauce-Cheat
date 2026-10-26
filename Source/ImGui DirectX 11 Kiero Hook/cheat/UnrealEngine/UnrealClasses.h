@@ -228,8 +228,12 @@ struct ACapsuleComponent
 	union
 	{
 		UObject_d;
-		// ComponentToWorld.Translation (ComponentToWorld @ 0x188, Translation @ +0x10)
-		DEFINE_MEMBER_N(vec3, ModifiableLocation, 0x198);
+		// ComponentToWorld @ 0x190（UE4.22 私有，与 ARootComponent / USkeletalMeshComponent 同一布局）
+		// 世界坐标 = ComponentToWorld.Translation = 0x190 + 0x10 = 0x1A0
+		// 警告：0x198 是 ComponentToWorld.Rotation.z、0x19C 是 Rotation.w，0x1A0 才是 Translation.x。
+		// 曾经把 0x198 当作"位置 z"读写（4.16.3 的旧偏移），结果 Translation.x 被当成高度钳制到 0，
+		// 表现为地图正中一道看不见的墙：World X < 0 的一侧永远进不去，且每帧被拽回 X = 0
+		DEFINE_MEMBER_N(FTransform, CompToWorld, 0x190);
 		DEFINE_MEMBER_N(const vec3, RelativeLocation, 0x164);
 	};
 };
